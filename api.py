@@ -3,6 +3,7 @@ import sqlite3
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from typing import Dict, List, Optional
 import uvicorn
 
@@ -37,6 +38,10 @@ class FeedGrepAPI:
         )
         
         self._setup_routes()
+        
+        # 挂载静态文件目录，提供index.html和其他静态资源
+        # 注意：这必须在设置路由之后，以避免拦截API请求
+        self.app.mount("/", StaticFiles(directory=".", html=True), name="static")
     
     def _setup_routes(self):
         """设置API路由"""

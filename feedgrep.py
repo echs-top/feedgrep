@@ -72,6 +72,9 @@ class FeedGrepProcessor:
             解析后的RSS条目列表
         """
         try:
+            # 设置feedparser的超时和代理（如果需要）
+            import socket
+            socket.setdefaulttimeout(30)
             feed = feedparser.parse(url)
             items = []
             
@@ -190,7 +193,10 @@ class FeedGrepProcessor:
                 source_name = feed.get('name', 'Unknown')
                 url = feed.get('url', '')
                 if url:
-                    self.process_feed(url, category, source_name)
+                    try:
+                        self.process_feed(url, category, source_name)
+                    except Exception as e:
+                        log.error(f"Failed to process feed {source_name} ({url}): {e}")
         
         log.info("All feeds processed.")
     
