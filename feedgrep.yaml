@@ -153,4 +153,5 @@ default_keywords:
   - 天鹅到家 家政 保洁 保姆 月嫂 家庭服务
   - 花生油
 
+# 定时抓取RSS源的频率，单位：分钟
 interval_minutes: 30
