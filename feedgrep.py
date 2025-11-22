@@ -225,7 +225,7 @@ class FeedGrepProcessor:
 def main():
     """主函数"""
     parser = argparse.ArgumentParser(description='FeedGrep - RSS聚合器')
-    parser.add_argument('--host', default='127.0.0.1', help='API服务监听地址')
+    parser.add_argument('--host', default='0.0.0.0', help='API服务监听地址')
     parser.add_argument('--port', type=int, default=8000, help='API服务端口')
     
     args = parser.parse_args()
