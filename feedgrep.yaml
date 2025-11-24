@@ -54,11 +54,11 @@ categories:
       url: https://rsshub.rssforever.com/coolapk/toutiao
 
   pm&dev:  # 产品研发
-    - name: 人人都是产品经理-产品运营
+    - name: 产品运营
       url: https://www.woshipm.com/category/operate/feed
     - name: 人人都是产品经理-热门
       url: https://rsshub.rssforever.com/woshipm/popular
-    - name: 掘金本周最热
+    - name: 掘金
       url: https://rsshub.rssforever.com/juejin/trending/all/weekly
     - name: 博客园
       url: https://rsshub.rssforever.com/cnblogs/aggsite/topdiggs
@@ -82,11 +82,11 @@ categories:
       url: https://rsshub.rss.zgdnz.cc/cls/hot
     - name: 同花顺
       url: https://rsshub.rssforever.com/10jqka/realtimenews
-    - name: 第一财经-头条
+    - name: 第一财经
       url: https://rsshub.rssforever.com/yicai/headline
-    - name: 雪球-今日话题
+    - name: 雪球
       url: https://xueqiu.com/hots/topic/rss
-    - name: 富途牛牛-头条
+    - name: 富途牛牛
       url: https://rsshub.rssforever.com/futunn/highlights
     - name: 华尔街见闻-最热
       url: https://rsshub.rssforever.com/wallstreetcn/hot
