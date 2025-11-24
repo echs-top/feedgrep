@@ -108,7 +108,7 @@ categories:
       url: https://rsshub.rssforever.com/v2ex/topics/latest
     - name: V2EX-最热
       url: https://rsshub.rssforever.com/v2ex/topics/hot
-    - name: Linux.do
+    - name: Linux.do - 热门
       url: https://rsshub.rssforever.com/telegram/channel/linux_do
     - name: LINUX DO - 最新话题
       url: https://linuxdo.apiok.eu.org/latest.rss
@@ -151,7 +151,7 @@ categories:
 
 # 默认关键字配置
 default_keywords:
-  - AI 人工智能 模型 -air -gai -mail
+  - AI 人工智能 +模型 -air -gai -mail
   - 纳斯达克 标普 道琼斯
   - 恒生科技 恒生
   - ETF
