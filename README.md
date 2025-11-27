@@ -125,6 +125,7 @@ FeedGrep支持将新的RSS条目推送到多种渠道：
 
 1. 飞书群机器人
 2. 企业微信群机器人
+3. 个人微信（基于企业微信应用，在企微后台-微信插件，微信扫码关注，推送到个人微信）
 3. 邮件
 4. Telegram
 
@@ -155,6 +156,12 @@ push:
     webhook_weixin:
       type: wework
       wework_msg_type: text  # 可选:text, markdown
+      url: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=XXXXXXXXXXXXXXXXXX
+    
+    # 个人微信
+    webhook_weixin:
+      type: wework
+      wework_msg_type: text  # 只可选:text，需要在企微后台扫码关注“微信插件”，其他配置和上述企微机器人一样
       url: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=XXXXXXXXXXXXXXXXXX
       
     # 邮件推送
