@@ -47,10 +47,10 @@ class FeedGrepProcessor:
             CREATE TABLE IF NOT EXISTS feedgrep_items (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 title TEXT,
-                link TEXT UNIQUE,
+                link TEXT,
                 description TEXT,
                 pub_date TEXT,
-                guid TEXT UNIQUE,
+                guid TEXT,
                 category TEXT,
                 source_name TEXT,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -58,10 +58,23 @@ class FeedGrepProcessor:
         ''')
         
         # 创建索引来提高查询速度
+        cursor.execute('CREATE INDEX IF NOT EXISTS idx_title ON feedgrep_items(title)')
         cursor.execute('CREATE INDEX IF NOT EXISTS idx_guid ON feedgrep_items(guid)')
         cursor.execute('CREATE INDEX IF NOT EXISTS idx_link ON feedgrep_items(link)')
         cursor.execute('CREATE INDEX IF NOT EXISTS idx_category ON feedgrep_items(category)')
         cursor.execute('CREATE INDEX IF NOT EXISTS idx_source_name ON feedgrep_items(source_name)')
+        
+        # 为 is_item_exists 方法添加复合索引
+        cursor.execute('CREATE INDEX IF NOT EXISTS idx_source_title_link_guid ON feedgrep_items(source_name, title, link, guid)')
+        
+        # 为关键词搜索添加复合索引
+        cursor.execute('CREATE INDEX IF NOT EXISTS idx_created_at ON feedgrep_items(created_at DESC)')
+        
+        # 为分类和时间组合查询添加索引
+        cursor.execute('CREATE INDEX IF NOT EXISTS idx_category_created_at ON feedgrep_items(category, created_at DESC)')
+        
+        # 为来源和时间组合查询添加索引
+        cursor.execute('CREATE INDEX IF NOT EXISTS idx_source_name_created_at ON feedgrep_items(source_name, created_at DESC)')
         
         conn.commit()
         conn.close()
@@ -118,10 +131,10 @@ class FeedGrepProcessor:
             try:
                 conn = sqlite3.connect(self.db_path, timeout=20.0)
                 cursor = conn.cursor()
-                
+
                 cursor.execute(
-                    'SELECT COUNT(*) FROM feedgrep_items WHERE source_name = ? AND title = ? AND (link = ? OR guid = ?)',
-                    (source_name, title, link, guid)
+                    'SELECT COUNT(*) FROM feedgrep_items WHERE source_name = ? AND title = ? AND link = ?',
+                    (source_name, title, link)
                 )
                 count = cursor.fetchone()[0]
                 
@@ -350,10 +363,10 @@ class FeedGrepProcessor:
                     excluded_keywords.append(part[1:])  # 去掉-号
                 else:
                     normal_keywords.append(part)
-            
+
             # 获取爬取频率作为时间范围
             interval_minutes = self.config.get('interval_minutes', 30)
-            
+
             # 构建查询语句
             query_conditions = [f"created_at >= datetime('now', '-{interval_minutes} minutes')"]  # 只查找最近几次爬取周期内的新内容
             params = []
