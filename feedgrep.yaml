@@ -205,7 +205,7 @@ push:
   enabled: false
   
   # 推送时间范围控制开关
-  time_restriction_enabled: true
+  time_restriction_enabled: false
   
   # 推送时间范围（24小时制，北京时间）
   time_start: "08:00"  # 早上8点
